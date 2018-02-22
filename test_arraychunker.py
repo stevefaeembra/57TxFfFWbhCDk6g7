@@ -14,6 +14,12 @@ class TestArrayChunker(unittest.TestCase):
         chunks = chunk_array([1, 2, 3, 4], 2)
         self.assertEqual(chunks, [[1, 2], [3, 4]])
 
+        chunks = chunk_array([1, 2, 3, 4, 5, 6, 7, 8, 9], 2)
+        self.assertEqual(chunks, [[1, 2, 3, 4, 5], [6, 7, 8, 9]])
+
+        chunks = chunk_array([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)
+        self.assertEqual(chunks, [[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
     def test_split_chunks_with_remainder(self):
         chunks = chunk_array([1, 2, 3, 4, 5], 3)
         self.assertEqual(chunks, [[1, 2], [3, 4], [5]])
@@ -32,9 +38,6 @@ class TestArrayChunker(unittest.TestCase):
     def test_spilt_into_too_many_chunks(self):
         with self.assertRaises(AssertionError):
             chunk_array([1, 2, 3, 4], 7)
-
-    def test_split_empty_array(self):
-        self.assertEqual(True, False)
 
 
 if __name__ == '__main__':
