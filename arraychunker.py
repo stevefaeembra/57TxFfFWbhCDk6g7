@@ -1,4 +1,6 @@
 import math
+from itertools import zip_longest, chain
+
 
 """
 Given an array of length >= 0, and a positive integer N,
@@ -47,3 +49,27 @@ def chunk_array(array, target_chunks):
     if len(buffer) > 0:  # flush remainder
         result.append(buffer)
     return result
+
+
+def iter_chunk_array(array, target_chunks):
+    """
+    As above, but uses itertools so should work with very large arrays
+    :param array:
+    :param target_chunks:
+    :return:
+    """
+
+    def splitter(array, chunks):
+        # splitter('ABCDEFG', 3) --> ABC DEF Gxx". Recipe from Python docs.
+        args = [iter(array)] * chunks
+        return zip_longest(*args, fillvalue=None)
+
+    chunk_size = get_chunk_size(len(array), target_chunks)
+    return list(
+            chain(
+                [item for item in bucket]
+                for bucket in
+                splitter(array, chunk_size)
+            )
+        )
+

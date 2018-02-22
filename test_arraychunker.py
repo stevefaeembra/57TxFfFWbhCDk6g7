@@ -1,5 +1,5 @@
 import unittest
-from arraychunker import get_chunk_size, chunk_array
+from arraychunker import get_chunk_size, chunk_array, iter_chunk_array
 
 
 class TestArrayChunker(unittest.TestCase):
@@ -38,6 +38,18 @@ class TestArrayChunker(unittest.TestCase):
     def test_spilt_into_too_many_chunks(self):
         with self.assertRaises(AssertionError):
             chunk_array([1, 2, 3, 4], 7)
+
+    def test_iterative_version_split_even_size_chunks(self):
+        chunks = iter_chunk_array([1, 2, 3, 4], 2)
+        self.assertEqual(chunks, [[1, 2], [3, 4]])
+
+        chunks = iter_chunk_array([1, 2, 3, 4, 5, 6, 7, 8, 9], 2)
+        self.assertEqual(chunks, [[1, 2, 3, 4, 5], [6, 7, 8, 9]])
+
+        chunks = iter_chunk_array([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)
+        self.assertEqual(chunks, [[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+
 
 
 if __name__ == '__main__':
