@@ -15,7 +15,11 @@ class TestArrayChunker(unittest.TestCase):
         self.assertEqual(chunks, [[1, 2], [3, 4]])
 
     def test_split_chunks_with_remainder(self):
-        self.assertEqual(True, False)
+        chunks = chunk_array([1, 2, 3, 4, 5], 3)
+        self.assertEqual(chunks, [[1, 2], [3, 4], [5]])
+
+        chunks = chunk_array([1, 2, 3, 4, 5], 2)
+        self.assertEqual(chunks, [[1, 2, 3], [4, 5]])
 
     def test_split_into_no_chunks(self):
         with self.assertRaises(AssertionError):

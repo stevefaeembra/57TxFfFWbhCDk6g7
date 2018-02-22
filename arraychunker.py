@@ -30,4 +30,19 @@ def chunk_array(array, target_chunks):
     assert target_chunks <= len(array)
     if target_chunks == len(array):
         return [array]
-    return []
+
+    # go through array. fill buffer. when buffer hits desired size append
+    # to result and flush buffer. this is naive implementation and works
+    # but will not scale well beyond small arrays
+
+    chunk_size = get_chunk_size(len(array), target_chunks)
+    result = []
+    buffer = []
+    for ix in range(0, len(array)):
+        if len(buffer) == chunk_size:
+            result.append(buffer)
+            buffer = []
+        buffer.append(array[ix])
+    if len(buffer) > 0:  # flush remainder
+        result.append(buffer)
+    return result
