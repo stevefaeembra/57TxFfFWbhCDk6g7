@@ -15,3 +15,19 @@ def get_chunk_size(size, target_chunks):
     :return:
     """
     return int(math.ceil(size/target_chunks))
+
+
+def chunk_array(array, target_chunks):
+    """
+    Split an array into target number of equal sized chunks,
+    the last chunk maybe shorter than the others if the size of array is
+    not an exact multiple of target number of chunks
+    :param array: array to chunk
+    :param target_chunks: desired number of chuks
+    :return: [[a b c] [d e f ]...] array of arrays
+    """
+    assert target_chunks > 0
+    assert target_chunks <= len(array)
+    if target_chunks == len(array):
+        return [array]
+    return []
