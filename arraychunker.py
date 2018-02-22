@@ -59,6 +59,11 @@ def iter_chunk_array(array, target_chunks):
     :return:
     """
 
+    assert target_chunks > 0
+    assert target_chunks <= len(array)
+    if target_chunks == len(array):
+        return [array]
+
     def splitter(array, chunks):
         # splitter('ABCDEFG', 3) --> ABC DEF Gxx". Recipe from Python docs.
         args = [iter(array)] * chunks

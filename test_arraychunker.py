@@ -56,6 +56,14 @@ class TestArrayChunker(unittest.TestCase):
         chunks = iter_chunk_array([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)
         self.assertEqual(chunks, [[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 
+    @unittest.skip("skiped in case running inside IDE with GUI console")
+    def test_massive_array(self):
+
+        chunks = [x for x in range(0, 1000000)]
+        chunks = iter_chunk_array(chunks, 10)
+        for y in chunks:
+            print(y)
+
 
 if __name__ == '__main__':
     unittest.main()
