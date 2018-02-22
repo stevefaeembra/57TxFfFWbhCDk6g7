@@ -1,3 +1,5 @@
+import math
+
 """
 Given an array of length >= 0, and a positive integer N,
 return the contents of the array divided into N equally sized arrays.
@@ -12,4 +14,4 @@ def get_chunk_size(size, target_chunks):
     :param target_chunks: desired number of chunks
     :return:
     """
-    return size//target_chunks
+    return int(math.ceil(size/target_chunks))
