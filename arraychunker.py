@@ -64,12 +64,14 @@ def iter_chunk_array(array, target_chunks):
         args = [iter(array)] * chunks
         return zip_longest(*args, fillvalue=None)
 
+    def non_null(array):
+        return list(filter(lambda x: x is not None, iter(array)))
+
     chunk_size = get_chunk_size(len(array), target_chunks)
     return list(
             chain(
-                [item for item in bucket]
+                non_null([item for item in bucket])
                 for bucket in
                 splitter(array, chunk_size)
             )
         )
-

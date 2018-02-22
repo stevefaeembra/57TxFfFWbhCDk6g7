@@ -39,7 +39,14 @@ class TestArrayChunker(unittest.TestCase):
         with self.assertRaises(AssertionError):
             chunk_array([1, 2, 3, 4], 7)
 
-    def test_iterative_version_split_even_size_chunks(self):
+    def test_iterative_version_split_chunks_with_remainder(self):
+        chunks = iter_chunk_array([1, 2, 3, 4, 5], 3)
+        self.assertEqual(chunks, [[1, 2], [3, 4], [5]])
+
+        chunks = iter_chunk_array([1, 2, 3, 4, 5], 2)
+        self.assertEqual(chunks, [[1, 2, 3], [4, 5]])
+
+    def test_split_even_size_chunks(self):
         chunks = iter_chunk_array([1, 2, 3, 4], 2)
         self.assertEqual(chunks, [[1, 2], [3, 4]])
 
@@ -48,8 +55,6 @@ class TestArrayChunker(unittest.TestCase):
 
         chunks = iter_chunk_array([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)
         self.assertEqual(chunks, [[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-
-
 
 
 if __name__ == '__main__':
